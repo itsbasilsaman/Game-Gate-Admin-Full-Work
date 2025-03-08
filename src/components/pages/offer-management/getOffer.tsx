@@ -131,29 +131,38 @@ const GetOffer = () => {
              
             </div>
             <div className="w-full flex flex-col md:flex-row justify-between gap-3">
-              <p className="text-sm text-gray-600"><span className="text-[16px] font-medium text-black">Arabic Title : </span>{offer.titleAr}</p>
-              <button
-                onClick={() => handleVerificationOffer(offer?.id)}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-              >
-                Update Status
-              </button>
-              <p
-                className={`text-sm font-semibold text-center lg:text-left ${
-                  offer.status == 'APPROVED' ? "text-green-600" : (offer.status == 'PENDING' ? 'text-orange-500' : "text-red-600")
-                }`}
-              >
-                {offer.status}
-              </p>
-              <button
-                onClick={() => toggleExpand(index)}
-                className="text-blue-600 hover:text-blue-800 flex justify-center items-center uppercase gap-1"
-              >
-                <span className="text-[14px] font-medium">
-                  {expandedIndex === index ? "View Less" : "View Details"}
-                </span> <FaEye />
-              </button>
-            </div>
+  <p className="text-sm text-gray-600">
+    <span className="text-[16px] font-medium text-black">Arabic Title : </span>
+    {offer.titleAr}
+  </p>
+  
+  {/* Wrap buttons and status in a flex container with a gap */}
+  <div className="flex flex-col md:flex-row gap-6 items-center">
+    <button
+      onClick={() => handleVerificationOffer(offer?.id)}
+      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+    >
+      Update Status
+    </button>
+    
+    <p
+      className={`text-sm font-semibold text-center lg:text-left ${
+        offer.status == 'APPROVED' ? "text-green-600" : (offer.status == 'PENDING' ? 'text-orange-500' : "text-red-600")
+      }`}
+    >
+      {offer.status}
+    </p>
+    
+    <button
+      onClick={() => toggleExpand(index)}
+      className="text-blue-600 hover:text-blue-800 flex justify-center items-center uppercase gap-1"
+    >
+      <span className="text-[14px] font-medium">
+        {expandedIndex === index ? "View Less" : "View Details"}
+      </span> <FaEye />
+    </button>
+  </div>
+</div>
 
             {expandedIndex === index && (
               <div className="mt-4">

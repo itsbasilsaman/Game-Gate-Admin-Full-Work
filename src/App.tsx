@@ -1,12 +1,11 @@
 import React, { Fragment, Suspense } from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation,   } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { Loading } from "./components/pages/Loading";
 import { AdminLogin } from "./components/forms/admin/login";
 import { useSelector } from "react-redux";
 import { RootState } from "./reduxKit/store";
 import DefaultLayout from "./layout/DefaultLayout";
-// import ECommerce from "./components/pages/Dashboard/Ecommerce";
 import SubServiceForm from "./components/pages/Form/SubServiceForm";
 import BrandData from "./components/pages/Form/AddBrand"; 
 import SubService from "./components/Table/SubService";
@@ -24,17 +23,19 @@ import RegionListSection from "./components/Table/RegionListSection";
 import GetOffer from "./components/pages/offer-management/getOffer";
 import ProductListSection from "./components/pages/product/productList";
 import ProductItem from "./components/pages/product/productListItem";
+import { LandingPage } from "./components/pages/LandingPage";
+  // Import the LandingPage component
 
 export const App: React.FC = React.memo(() => {
   const { isLogged } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
   const isLoginRoute = location.pathname === "/admin/login";
   
-  
   console.log('Check if the user is logged in: ', isLogged);
+  
   // Redirect to login page if user is not logged in
   if (!isLogged && !isLoginRoute) {
-    return <Navigate to="/admin/login" replace />;
+    return <LandingPage />; // Show the LandingPage instead of redirecting immediately
   }
 
   return (
@@ -42,7 +43,8 @@ export const App: React.FC = React.memo(() => {
       <Toaster position="top-center" />
       <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path="/admin/login"  element={<AdminLogin />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/" element={<LandingPage />} /> {/* Show LandingPage at root */}
         </Routes>
         {!isLoginRoute && isLogged && (
           <DefaultLayout>
@@ -56,7 +58,6 @@ export const App: React.FC = React.memo(() => {
               <Route path="/sellerprofile" element={<SellerProfile />} />
               <Route path="/subserviceform" element={<SubServiceForm />} />
               <Route path="/brandlist" element={<BrandList />} />
-            
               <Route path="/servicelistsection" element={<ServiceListSection />} />
               <Route path="/userlist" element={<UserList />} />
               <Route path="/getuser/:userId" element={<GetUserById />} />
