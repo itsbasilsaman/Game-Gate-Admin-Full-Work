@@ -58,7 +58,21 @@ const AddProduct: React.FC = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
   
  
-  const purchaseTypes = ["TOP_UP", "DIGITAL_PINS", "ACCOUNTS", "GIFT_CARD","EGIFT_CARDS","RETAIL_GIFT_CARDS","ACCOUNTS","PLATFORM_ENGAGEMENT","EWALLET"];
+  const purchaseTypes = [
+    "TOP_UP",
+    "DIGITAL_PINS",
+    "ACCOUNTS",
+    "GIFT_CARD",
+    "EGIFT_CARDS",
+    "RETAIL_GIFT_CARDS",
+    "PLATFORM_ENGAGEMENT",
+    "EWALLET",
+    "COACHING",
+    "BOOSTING",
+    "ITEMS",
+    "GAME_COINS"
+  ];
+  
 
  
   
