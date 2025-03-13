@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import Breadcrumb from "../../Breadcrumbs/Breadcrumb";
-import { validateProductData } from "./validation";
+// import { validateProductData } from "./validation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../reduxKit/store";
 import { AddProductAction } from "../../../reduxKit/actions/auth/product/productAction";
@@ -36,7 +36,7 @@ const AddProduct: React.FC = () => {
     descriptionAr: string;
     purchaseType: string;
     deliveryTypes: string[];
-    subServiceId: string;
+    subServiceId?: string;
     image: File | null;
   }>({
     serviceId: "",
@@ -72,11 +72,7 @@ const AddProduct: React.FC = () => {
     "ITEMS",
     "GAME_COINS"
   ];
-  
-
  
-  
-
   const handleDeliveryTypeChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -222,34 +218,34 @@ const AddProduct: React.FC = () => {
     console.log("The submit got triggered");
 
     // Validate product data
-    const validationErrors = validateProductData(product);
-    if (Object.keys(validationErrors).length > 0) {
-      console.error("Validation errors:", validationErrors);
-      const errorMessages = Object.values(validationErrors).join("\n");
-      Swal.fire({
-        icon: "error",
-        title: "Validation Error!",
-        text: errorMessages,
-        timer: 3000,
-        toast: true,
-        showConfirmButton: false,
-        timerProgressBar: true,
-        background: "#fff",
-        color: "#721c24",
-        iconColor: "#f44336",
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
-      });
-      return;
-    }
+    // const validationErrors = validateProductData(product);
+    // if (Object.keys(validationErrors).length > 0) {
+    //   console.error("Validation errors:", validationErrors);
+    //   const errorMessages = Object.values(validationErrors).join("\n");
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: "Validation Error!",
+    //     text: errorMessages,
+    //     timer: 3000,
+    //     toast: true,
+    //     showConfirmButton: false,
+    //     timerProgressBar: true,
+    //     background: "#fff",
+    //     color: "#721c24",
+    //     iconColor: "#f44336",
+    //     didOpen: (toast) => {
+    //       toast.addEventListener("mouseenter", Swal.stopTimer);
+    //       toast.addEventListener("mouseleave", Swal.resumeTimer);
+    //     },
+    //     showClass: {
+    //       popup: "animate__animated animate__fadeInDown",
+    //     },
+    //     hideClass: {
+    //       popup: "animate__animated animate__fadeOutUp",
+    //     },
+    //   });
+    //   return;
+    // }
 
     // Create form data
     const formData = new FormData();
@@ -260,7 +256,10 @@ const AddProduct: React.FC = () => {
     formData.append("titleAr", product.titleAr);
     formData.append("descriptionAr", product.descriptionAr);
     formData.append("purchaseType", product.purchaseType);
-    formData.append("subServiceId", product.subServiceId);
+    if (product.subServiceId !== undefined && product.subServiceId !== null && product.subServiceId !== "") {
+      formData.append("subServiceId", product.subServiceId);
+    }
+    
     // Convert array to JSON string for form submission
     if (Array.isArray(product.deliveryTypes)) {
       formData.append("deliveryTypes", product.deliveryTypes.join(","));
