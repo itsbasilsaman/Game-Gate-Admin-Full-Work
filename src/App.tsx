@@ -34,7 +34,7 @@ export const App: React.FC = React.memo(() => {
   
   const accessToken = Cookies.get("accessToken");
 
-  // console.log("Check if the user is logged in: ", isLoggedGGAdmin);
+  console.log("Check if the user is logged in: ", isLoggedGGAdmin);
   console.log("Admin token is: ", accessToken);
 
   // Redirect to login page if token is missing and not already on the login page
