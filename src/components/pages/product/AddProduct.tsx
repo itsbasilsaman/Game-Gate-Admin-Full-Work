@@ -18,10 +18,8 @@ const AddProduct: React.FC = () => {
   const { loading } = useSelector((state: RootState) => state.product);
   const { serviceLoading } = useSelector((state: RootState) => state.service);
   const { brandLoading } = useSelector((state: RootState) => state.brand);
-    const [brandSearchTerm, setBrandSearchTerm] = useState<string>("");
+  const [brandSearchTerm, setBrandSearchTerm] = useState<string>("");
   const [isBrandDropdownOpen, setIsBrandDropdownOpen] = useState<boolean>(false);
-
- 
   const { subServiceLoading } = useSelector(
     (state: RootState) => state.subService
   );
