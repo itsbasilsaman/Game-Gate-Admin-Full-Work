@@ -9,6 +9,7 @@ import {
   UnBanUserAction,
   GetUserByIdAction,
 } from "../../../reduxKit/actions/auth/users/userManagmentAction";
+import toast from "react-hot-toast";
 
 const UserList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,9 +31,17 @@ const UserList = () => {
   const handleToggleBan = async (userId: string, isActive: boolean) => {
     try {
       if (isActive) {
-        await dispatch(BanUserAction(userId));
+        const response=  await dispatch(BanUserAction(userId));
+        if(response.payload.success){
+          toast.success(response.payload.success)
+         
+          }
       } else {
-        await dispatch(UnBanUserAction(userId));
+        const response= await dispatch(UnBanUserAction(userId));
+        if(response.payload.success){
+          toast.success(response.payload.success) 
+       
+          }
       }
       setUsers((prevUsers) =>
         prevUsers.map((user) =>

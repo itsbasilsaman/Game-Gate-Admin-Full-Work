@@ -1,27 +1,13 @@
 import {axiosIn, configWithToken} from "../../../../config/constants";
-
-
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
-
-
-export interface Iservice{
-    name: string
-    nameAr:string 
-    icon:File|null
-}
-
-
 
 
 export const AddLevelAction= createAsyncThunk(
     "admin/addLevelAction",
     async (adminCredentials:FormData,{rejectWithValue})=>{
         try {
-            console.log( "admin add level ",adminCredentials);
             const response = await axiosIn.post(`/admin/level`, adminCredentials,configWithToken());
-            console.log("the response data is خب سثق ", response);
+            console.log("the response add level ", response);
             return response.data;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
@@ -41,7 +27,7 @@ export const GetLevelAction= createAsyncThunk(
             console.log( "admin get level ");
             const response = await axiosIn.get(`/admin/level`,configWithToken());
             console.log("the response get tyhe level data is ", response);
-            return response.data.data;
+            return response.data;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
             if (error.response && error.response.data) {
@@ -98,7 +84,7 @@ export const GetUsersByLevelAction= createAsyncThunk(
         try {
             console.log( "admin get service ",id);
             const response = await axiosIn.get(`/admin/level/${id}/users?limit=10&skip=20`,configWithToken());
-            console.log("the response get tyhe level data is ", response);
+            console.log("the  userlevel  ", response);
             return response.data
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } catch (error: any) {
